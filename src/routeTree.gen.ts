@@ -14,8 +14,12 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as SearchImport } from './routes/search'
+import { Route as ProfileImport } from './routes/profile'
 import { Route as MainImport } from './routes/main'
+import { Route as LoginImport } from './routes/login'
+import { Route as AboutUsImport } from './routes/aboutUs'
 import { Route as Pages123ContactImport } from './routes/pages123/Contact'
+import { Route as Pages123BlogImport } from './routes/pages123/Blog'
 import { Route as Pages123IdImport } from './routes/pages123/$id'
 
 // Create Virtual Routes
@@ -35,8 +39,23 @@ const SearchRoute = SearchImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const ProfileRoute = ProfileImport.update({
+  path: '/profile',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const MainRoute = MainImport.update({
   path: '/main',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const LoginRoute = LoginImport.update({
+  path: '/login',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AboutUsRoute = AboutUsImport.update({
+  path: '/aboutUs',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -47,6 +66,11 @@ const IndexLazyRoute = IndexLazyImport.update({
 
 const Pages123ContactRoute = Pages123ContactImport.update({
   path: '/pages123/Contact',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const Pages123BlogRoute = Pages123BlogImport.update({
+  path: '/pages123/Blog',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -66,11 +90,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexLazyImport
       parentRoute: typeof rootRoute
     }
+    '/aboutUs': {
+      id: '/aboutUs'
+      path: '/aboutUs'
+      fullPath: '/aboutUs'
+      preLoaderRoute: typeof AboutUsImport
+      parentRoute: typeof rootRoute
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginImport
+      parentRoute: typeof rootRoute
+    }
     '/main': {
       id: '/main'
       path: '/main'
       fullPath: '/main'
       preLoaderRoute: typeof MainImport
+      parentRoute: typeof rootRoute
+    }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileImport
       parentRoute: typeof rootRoute
     }
     '/search': {
@@ -94,6 +139,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Pages123IdImport
       parentRoute: typeof rootRoute
     }
+    '/pages123/Blog': {
+      id: '/pages123/Blog'
+      path: '/pages123/Blog'
+      fullPath: '/pages123/Blog'
+      preLoaderRoute: typeof Pages123BlogImport
+      parentRoute: typeof rootRoute
+    }
     '/pages123/Contact': {
       id: '/pages123/Contact'
       path: '/pages123/Contact'
@@ -108,10 +160,14 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren({
   IndexLazyRoute,
+  AboutUsRoute,
+  LoginRoute,
   MainRoute,
+  ProfileRoute,
   SearchRoute,
   AboutLazyRoute,
   Pages123IdRoute,
+  Pages123BlogRoute,
   Pages123ContactRoute,
 })
 
@@ -124,18 +180,31 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/aboutUs",
+        "/login",
         "/main",
+        "/profile",
         "/search",
         "/about",
         "/pages123/$id",
+        "/pages123/Blog",
         "/pages123/Contact"
       ]
     },
     "/": {
       "filePath": "index.lazy.tsx"
     },
+    "/aboutUs": {
+      "filePath": "aboutUs.tsx"
+    },
+    "/login": {
+      "filePath": "login.tsx"
+    },
     "/main": {
       "filePath": "main.tsx"
+    },
+    "/profile": {
+      "filePath": "profile.tsx"
     },
     "/search": {
       "filePath": "search.tsx"
@@ -145,6 +214,9 @@ export const routeTree = rootRoute.addChildren({
     },
     "/pages123/$id": {
       "filePath": "pages123/$id.tsx"
+    },
+    "/pages123/Blog": {
+      "filePath": "pages123/Blog.tsx"
     },
     "/pages123/Contact": {
       "filePath": "pages123/Contact.tsx"

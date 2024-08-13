@@ -19,7 +19,7 @@ const Itemfilters = v.object({
 
 });
 
-type Itemfilters= v.Output<typeof Itemfilters>;
+// type Itemfilters= v.Output<typeof Itemfilters>;
 
 type Category = "electronics" | "clothing" | "books" | "toys";
 

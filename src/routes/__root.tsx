@@ -15,6 +15,12 @@ export const Route = createRootRoute({
             </Link>
              <Link to="/search" 
              >Search</Link> 
+             <Link to="/login">Login</Link>
+
+             <Link to="/profile">Profile</Link>
+             <Link to="/aboutUs">AboutUs</Link>
+             <Link to="/pages123/Contact">Copntact</Link>
+             
 
          
             
