@@ -13,6 +13,7 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as SearchImport } from './routes/search'
 import { Route as MainImport } from './routes/main'
 import { Route as Pages123ContactImport } from './routes/pages123/Contact'
 import { Route as Pages123IdImport } from './routes/pages123/$id'
@@ -28,6 +29,11 @@ const AboutLazyRoute = AboutLazyImport.update({
   path: '/about',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/about.lazy').then((d) => d.Route))
+
+const SearchRoute = SearchImport.update({
+  path: '/search',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const MainRoute = MainImport.update({
   path: '/main',
@@ -67,6 +73,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MainImport
       parentRoute: typeof rootRoute
     }
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchImport
+      parentRoute: typeof rootRoute
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -96,6 +109,7 @@ declare module '@tanstack/react-router' {
 export const routeTree = rootRoute.addChildren({
   IndexLazyRoute,
   MainRoute,
+  SearchRoute,
   AboutLazyRoute,
   Pages123IdRoute,
   Pages123ContactRoute,
@@ -111,6 +125,7 @@ export const routeTree = rootRoute.addChildren({
       "children": [
         "/",
         "/main",
+        "/search",
         "/about",
         "/pages123/$id",
         "/pages123/Contact"
@@ -121,6 +136,9 @@ export const routeTree = rootRoute.addChildren({
     },
     "/main": {
       "filePath": "main.tsx"
+    },
+    "/search": {
+      "filePath": "search.tsx"
     },
     "/about": {
       "filePath": "about.lazy.tsx"
